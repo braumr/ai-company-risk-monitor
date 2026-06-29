@@ -74,7 +74,7 @@ The model comparison is an experiment using weekly sentiment features. The histo
 
 ## Setup
 
-Install dependencies:
+Install the dashboard dependencies:
 
 ```bash
 pip install -r requirements.txt
@@ -86,4 +86,4 @@ Run the dashboard:
 streamlit run app.py
 ```
 
-To rerun the notebook collection workflow, provide your own Reddit and NewsAPI credentials in your environment or notebook runtime. Do not commit API keys or secrets.
+To rerun the notebook collection workflow, provide your own Reddit and NewsAPI credentials in your environment or notebook runtime. The notebook workflow may require additional analysis packages such as PRAW, NewsAPI, NLTK, scikit-learn, TensorFlow/Keras, and Jupyter. Do not commit API keys or secrets.

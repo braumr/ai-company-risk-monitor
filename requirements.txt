@@ -1,13 +1,3 @@
-pandas
-numpy
-matplotlib
-scikit-learn
-tensorflow
-nltk
-vaderSentiment
-praw
-requests
-newsapi-python
-jupyter
 streamlit
+pandas
 plotly
