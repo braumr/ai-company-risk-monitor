@@ -1,144 +1,89 @@
-# AI Adoption Risk Prediction Using NLP and Machine Learning
+# Public Sentiment of Enterprise Artificial Intelligence
 
-## Project Overview
-This project analyzes public discussion surrounding artificial intelligence adoption risk using natural language processing and machine learning techniques. The project collects AI-related discussions from Reddit and news sources, applies sentiment analysis and keyword-based risk detection, and forecasts future public AI risk sentiment trends.
+This project analyzes public sentiment around enterprise artificial intelligence using Reddit and NewsAPI data.
 
-The goal of the project is to determine whether public online discussions can provide early indicators of emerging AI adoption risks.
+It combines natural language processing, keyword-based risk indicators, weekly trend analysis, and a forecasting experiment to explore public AI sentiment and risk signals across major AI companies.
 
----
+## What the project does
 
-## Objectives
-The project pipeline was designed to:
+- Collects AI-related public discussion from Reddit using PRAW.
+- Collects AI-related news articles using NewsAPI.
+- Cleans and preprocesses text for analysis.
+- Matches records to companies or AI-related topics.
+- Applies VADER sentiment scoring.
+- Labels risk-related discussion using keyword-based risk indicators.
+- Uses TF-IDF and other text-derived features in the analysis workflow.
+- Aggregates records into weekly company-level sentiment trends.
+- Compares a historical mean baseline with a feedforward neural network forecasting experiment.
+- Provides a Streamlit dashboard for exploring sentiment, discussion volume, weekly trends, recent records, and forecast results.
 
-- Collect AI-related public discussion data
-- Analyze sentiment in AI discussions
-- Detect risk-related content
-- Track risk sentiment over time
-- Forecast future risk trends using machine learning
-- Export data for Power BI dashboard visualization
+## Data sources
 
----
+- Reddit comments collected with PRAW
+- News articles collected with NewsAPI
 
-## Data Sources
-The project uses:
+The dashboard uses the existing CSV exports in `data/` and does not require API credentials to run.
 
-- Reddit comments collected using PRAW
-- AI-related news articles collected using NewsAPI
+## Dashboard
 
-Subreddits include:
-- r/ArtificialIntelligence
-- r/Artificial
-- r/Technology
-- r/MachineLearning
-- r/OpenAI
-- r/ChatGPT
-- r/singularity
+Run the Streamlit dashboard:
 
+```bash
+streamlit run app.py
+```
 
----
+The dashboard reads from the existing CSV files:
 
-## Methods Used
+- `data/powerbi_record_level_export.csv`
+- `data/powerbi_weekly_trend_export.csv`
+- `data/powerbi_company_topic_summary.csv`
+- `data/powerbi_prediction_results.csv`
+- `data/prediction_results_actual_vs_feedforward_nn.csv`
 
-### Natural Language Processing
-- Text cleaning and preprocessing
-- Company/topic identification
-- VADER sentiment analysis
-- Keyword-based risk labeling
-- TF-IDF vectorization
+## Notebook
 
-### Machine Learning
-- Historical mean baseline forecasting
-- Feedforward neural network forecasting model
+The original analysis notebook is:
 
-### Time-Series Features
-- Weekly risk score aggregation
-- Lag feature generation
-- Rolling average features
+```text
+AI_Risk_Project.ipynb
+```
 
-### Visualization
-CSV outputs were exported for Power BI dashboard creation.
+The notebook contains the data collection, preprocessing, sentiment scoring, company/topic matching, risk keyword labeling, weekly feature generation, and forecasting experiment.
 
----
+## Forecasting experiment
 
-## Models Evaluated
+The forecasting portion compares:
 
-| Model | MAE | RMSE |
-|---|---:|---:|
-| Historical Mean Baseline | 0.2158 | 0.2788 |
-| Feedforward Neural Network | 0.2748 | 0.3798 |
+- Historical mean baseline
+- Feedforward neural network
 
-While the historical mean baseline outperformed the neural network based on pure numerical methods, the model captured directionality better. Still, this suggests that the dataset may have been too small or noisy for the neural network to generalize effectively.
+The model comparison is an experiment using weekly sentiment features. The historical mean baseline is included so the neural network results can be interpreted against a simple reference point.
 
----
-#### Visualizations
+## Technologies used
 
-### Weekly Risk Sentiment Scores
-![Weekly Risk Sentiment](img/Weeklyrisksentimenttrends.png)
+- Python
+- Pandas
+- NumPy
+- PRAW
+- NewsAPI
+- NLTK / VADER sentiment
+- Scikit-learn
+- TensorFlow / Keras
+- Streamlit
+- Plotly
 
-### AI Organization Word Cloud. Size set by counts of comments including mentions of risk.
-![Word Chart](img/AIOrgWordChart.png)
+## Setup
 
-### ACTUAL VS PREDICTED RISK SENTIMENT
-![Risk Sentiment](img/ActualvsPredictedRiskForecast.png)
-
-### Risk Rate by Company
-![Risk Rate by Company](img/riskratebycompany.png)
-
-
-
----
-
-## Installation
-
-Install the required Python packages:
+Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
----
-
-## Running the Project
-
-1. Open the Jupyter Notebook:
+Run the dashboard:
 
 ```bash
-jupyter notebook AI_Risk_Project.ipynb
+streamlit run app.py
 ```
 
-2. Add your own API credentials. I removed my personal keys:
-
-```python
-REDDIT_CLIENT_ID = "YOUR_REDDIT_CLIENT_ID"
-REDDIT_CLIENT_SECRET = "YOUR_REDDIT_CLIENT_SECRET"
-NEWS_API_KEY = "YOUR_NEWS_API_KEY"
-```
-
-3. Run the notebook cells sequentially.
-
----
-
-## Dashboard Outputs
-
-The project exports CSV files for Power BI visualization, including:
-
-- Weekly AI risk trends
-- Company-level risk comparisons
-- Sentiment analysis results
-- Forecasted risk predictions
-
----
-
-## Technologies Used
-
-- Python
-- Pandas
-- NumPy
-- TensorFlow / Keras
-- Scikit-learn
-- NLTK
-- VADER Sentiment
-- PRAW
-- Power BI
-
----
+To rerun the notebook collection workflow, provide your own Reddit and NewsAPI credentials in your environment or notebook runtime. Do not commit API keys or secrets.

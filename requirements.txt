@@ -9,3 +9,5 @@ praw
 requests
 newsapi-python
 jupyter
+streamlit
+plotly
